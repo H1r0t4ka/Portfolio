@@ -5,17 +5,79 @@
             src="./src/assets/me.jpg"
             alt="Profile picture"
         />
-        <p class="">Juan Manuel Quevedo Gonzalez</p>
+        <p class="font-bold">Juan Manuel Quevedo Gonzalez</p>
     </div>
 
-    <nav class="flex flex-row gap-8">
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#trabajos">Trabajos</a>
-        <a href="#proyectos">Proyectos</a>
+    <nav class="flex flex-row gap-x-8 marker:">
+        <a class="transition duration-300 ease-in-out hover:scale-120" href="#sobre-mi">Sobre mí</a>
+        <a class="transition duration-300 ease-in-out hover:scale-120" href="#trabajos">Trabajos</a>
+        <a class="transition duration-300 ease-in-out hover:scale-120" href="#proyectos">Proyectos</a>
     </nav>
 
     <div>
-        <button>Idioma</button>
-        <button>Modo</button>
+        <button
+            id="lang-toggle"
+            class="p-2 rounded-full transition duration-300 ease-in-out hover:scale-120"
+            aria-label="Cambiar idioma"
+        >
+            <!-- 🌐 SVG idioma -->
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 3c4.97 0 9 4.03 9 9s-4.03 9-9 9-9-4.03-9-9 4.03-9 9-9zm0 0c1.5 2.5 2.5 5.5 2.5 9S13.5 18.5 12 21m0-18C10.5 4.5 9.5 7.5 9.5 12S10.5 19.5 12 21m-8-9h16"
+                ></path>
+            </svg>
+        </button>
+
+        <!-- Botón cambio modo oscuro -->
+        <button
+            id="theme-toggle"
+            class="p-2 rounded-full transition delay-150 duration-300 ease-in-out hover:scale-120"
+            aria-label="Cambiar tema"
+        >
+            <!-- 🌙 SVG luna -->
+            <svg
+                id="moon-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6 block dark:hidden"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21.752 15.002A9.718 9.718 0 0112.002 21a9.719 9.719 0 01-9.75-9.75 9.72 9.72 0 0110.5-9.705 7.5 7.5 0 009 9.457z"
+                ></path>
+            </svg>
+
+            <!-- ☀️ SVG sol -->
+            <svg
+                class="w-6 h-6"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="none"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 5V3m0 18v-2M7.05 7.05 5.636 5.636m12.728 12.728L16.95 16.95M5 12H3m18 0h-2M7.05 16.95l-1.414 1.414M18.364 5.636 16.95 7.05M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"
+                ></path>
+            </svg>
+        </button>
     </div>
 </header>
