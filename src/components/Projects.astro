@@ -45,7 +45,7 @@ const projects = [
           <h3 class="font-semibold text-lg text-[#1E1E1E]">
             {translateLabels(project.titleKey)}
           </h3>
-          <span class="text-sm text-gray-400">{project.date}</span>
+          <span class="text-sm text-[#1E1E1E] dark:text-white">{project.date}</span>
         </header>
 
         <!-- Imagen -->
@@ -53,6 +53,7 @@ const projects = [
           src={project.image}
           alt={translateLabels(project.titleKey)}
           class="rounded-xl object-cover w-full h-64 mb-4"
+          loading="lazy"
         />
 
         <!-- Descripción -->
