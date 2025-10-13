@@ -1,0 +1,57 @@
+---
+const currentLang = Astro.currentLocale || "es";
+import { useTranslations } from "../i18n/utils";
+import { languageList } from "../i18n/ui";
+
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const experiences = [
+    {
+        titleKey: "exp.orbidi.title",
+        dateKey: "exp.orbidi.date",
+        taskKeys: [
+            "exp.orbidi.task1",
+            "exp.orbidi.task2",
+            "exp.orbidi.task3",
+            "exp.orbidi.task4",
+        ],
+    },
+    {
+        titleKey: "exp.freelance.title",
+        dateKey: "exp.freelance.date",
+        taskKeys: [
+            "exp.freelance.task1",
+            "exp.freelance.task2",
+            "exp.freelance.task3",
+        ],
+    },
+] as const;;
+---
+
+<section id="experiencia" class="bg-white rounded-3xl shadow-xl p-6 md:p-12 max-w-6xl mx-auto scroll-mt-40 dark:bg-[#1E1E1E] transition-colors duration-500 ease-in-out">
+  <h2 class="text-2xl font-bold text-center mb-3 text-[#1E1E1E] dark:text-white">{translateLabels('experience.title')}</h2>
+  <p class="text-[#1E1E1E] dark:text-white text-center mx-auto mb-10">
+    {translateLabels('experience.description')}
+  </p>
+
+  <div class="relative border-l-2 border-purple-200 max-w-5xl mx-auto space-y-10">
+    {experiences.map((exp) => (
+      <div class="pl-6 relative">
+        <div class="absolute -left-4.5 -top-1 bg-purple-500 rounded-full p-2 flex items-center justify-center shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" class="text-white"><path fill="currentColor" d="M4 21q-.825 0-1.412-.587T2 19V8q0-.825.588-1.412T4 6h4V4q0-.825.588-1.412T10 2h4q.825 0 1.413.588T16 4v2h4q.825 0 1.413.588T22 8v11q0 .825-.587 1.413T20 21zm6-15h4V4h-4z"/></svg>
+        </div>
+
+        <h3 class="font-semibold text-[#1E1E1E] dark:text-white text-lg">{translateLabels(exp.titleKey)}</h3>
+        <p class="text-sm text-[#6B7280] dark:text-gray-300 mb-3">{translateLabels(exp.dateKey)}</p>
+
+        <ul class="list-disc pl-5 space-y-2 text-[#1E1E1E] dark:text-white">
+          {exp.taskKeys.map((key) => (
+            <li class="leading-relaxed" set:html={translateLabels(key)}></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

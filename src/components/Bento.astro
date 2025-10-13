@@ -1,24 +1,34 @@
+---
+const currentLang = Astro.currentLocale || "es";
+import { useTranslations } from "../i18n/utils";
+import { languageList } from "../i18n/ui";
+
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+---
+
 <section
-    class="auto-rows-[50px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-5 sm:grid"
+    id="sobre-mi"
+    class="auto-rows-[50px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-8 gap-5 sm:grid scroll-mt-40 transition-colors duration-500 ease-in-out"
 >
     <!-- 1️⃣ Presentación principal -->
     <div
-        class="bento col-span-4 row-span-5 text-left items-start bg-[#FFFFFF] p-6 rounded-3xl justify-center content-center "
+        class="bento col-span-4 row-span-5 text-left items-start bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h1 class="text-6xl font-bold text-[#1E1E1E]">Juan Manuel Quevedo</h1>
-        <h2 class="text-4xl font-semibold text-[#A855F7] mb-2">
+        <h1 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">Juan Manuel Quevedo</h1>
+        <h2 class="text-4xl font-semibold text-[#A855F7] te mb-2">
             Frontend Developer
         </h2>
-        <p class="text-[#1E1E1E] mb-4">
-            Apasionado por crear experiencias de usuario fluidas y estéticas. Me
-            especializo en proyectos web emocionantes.
+        <p class="text-[#1E1E1E] dark:text-white mb-4">
+            {translateLabels('about.description')}
         </p>
 
-        <div class="flex flex-wrap gap-15 justify-start">
+        <div class="flex flex-wrap gap-4 justify-between">
             <a
                 target="_blank"
                 href="https://www.linkedin.com/in/juan-manuel-quevedo-gonzalez-9793b2156/"
-                class="flex items-center gap-2 py-2 rounded-md transition duration-300 ease-in-out hover:scale-120"
+                class="flex items-center gap-2 py-2 rounded-md transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +44,7 @@
             <a
                 target="_blank"
                 href="https://github.com/H1r0t4ka"
-                class="flex items-center gap-2 py-2 rounded-md text-sm transition duration-300 ease-in-out hover:scale-120"
+                class="flex items-center gap-2 py-2 rounded-md text-sm transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +59,7 @@
             </a>
             <a
                 href="mailto:juanm_quevedo@hotmail.com"
-                class="flex items-center gap-2 py-2 rounded-md transition duration-300 ease-in-out hover:scale-120"
+                class="flex items-center gap-2 py-2 rounded-md transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +74,7 @@
             </a>
             <a
                 href="whatsapp://send?phone=573043776096&text=Hola%20Juan%20Manuel!%20Te%20contacto%20desde%20tu%20portafolio."
-                class="flex items-center gap-2 p-2 rounded-md transition duration-300 ease-in-out hover:scale-120 border-1 border-[#1E1E1E]"
+                class="flex items-center gap-2 p-2 rounded-lg transition duration-300 ease-in-out hover:scale-120 border-1 border-[#1E1E1E] dark:border-white text-[#1E1E1E] dark:text-white"
             >
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -82,35 +92,35 @@
 
     <!-- 2️⃣ Rol -->
     <div
-        class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] p-6 rounded-3xl justify-center content-center"
+        class="bento col-span-2 row-span-2 text-center bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h3 class="text-sm text-[#1E1E1E]">Web Developer</h3>
-        <p class="text-lg font-semibold text-[#1A1A1A]">
+        <h3 class="text-sm text-[#1E1E1E] dark:text-white">Web Developer</h3>
+        <p class="text-lg font-semibold text-[#1A1A1A] dark:text-white">
             UX/UI<br />Frontend
         </p>
     </div>
 
     <!-- 3️⃣ País -->
     <div
-        class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] p-6 rounded-3xl justify-center content-center"
+        class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <p class="text-lg font-semibold text-[#1E1E1E]">Colombia</p>
+        <p class="text-lg font-semibold text-[#1E1E1E] dark:text-white">Colombia</p>
     </div>
 
     <!-- 4️⃣ Experiencia -->
     <div
-        class="bento col-span-4 row-span-4 flex items-center text-center bg-[#FFFFFF] p-6 rounded-3xl justify-center content-center"
+        class="bento col-span-4 row-span-4 flex items-center text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h2 class="text-6xl font-bold text-[#1E1E1E]">
-            +2 años de experiencia
+        <h2 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">
+            {translateLabels('about.experience')}
         </h2>
     </div>
 
     <!-- 5️⃣ Tecnologías -->
     <div
-        class="bento col-span-4 row-span-6 bg-[#FFFFFF] p-6 rounded-3xl justify-center content-center"
+        class="bento col-span-4 row-span-6 bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h3 class="text-gray-900 font-semibold mb-4 text-2xl">Tecnologías</h3>
+        <h3 class="text-gray-900 dark:text-white font-semibold mb-4 text-2xl">{translateLabels('about.tech')}</h3>
         <div class="grid grid-cols-3 place-items-center gap-x-4 gap-y-6">
             <div class="flex flex-col items-center gap-2">
                 <svg
@@ -307,8 +317,8 @@
 
     <!-- 6️⃣ Sitios creados -->
     <div
-        class="bento col-span-4 row-span-5 flex items-center justify-center bg-[#FFFFFF] p-6 rounded-3xl"
+        class="bento col-span-4 row-span-5 flex items-center justify-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl shadow-xl"
     >
-        <h2 class="text-6xl font-bold text-gray-900">+100 sitios web</h2>
+        <h2 class="text-6xl font-bold text-gray-900 dark:text-white">{translateLabels('about.projects')}</h2>
     </div>
 </section>

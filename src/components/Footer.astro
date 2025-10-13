@@ -1,0 +1,25 @@
+---
+// --- Zona de Script (Frontmatter) ---
+// 1. Creamos un nuevo objeto Date.
+const year = new Date().getFullYear(); 
+
+// Nota: Esta lógica se ejecuta UNA SOLA VEZ en el servidor (durante la compilación), 
+// por lo que el HTML estático resultante siempre tendrá el año correcto cuando se despliegue.
+
+const currentLang = Astro.currentLocale || "es";
+import { useTranslations } from "../i18n/utils";
+import { languageList } from "../i18n/ui";
+
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+---
+
+<footer>
+    <div class="bg-white dark:bg-[#1E1E1E] rounded-3xl shadow-xl p-6 md:p-12 max-w-6xl mx-auto my-6 text-center transition-colors duration-500 ease-in-out">
+        <h2 class="text-2xl font-bold text-[#1E1E1E] dark:text-white mb-4">{translateLabels('footer.title')}</h2>
+        <p class="text-[#1E1E1E] dark:text-white mb-6">
+            {translateLabels('footer.description')}
+        </p>
+        <span class="text-[#1E1E1E] dark:text-white">© {year} Juan Manuel Quevedo Gonzalez</span>
+</footer>

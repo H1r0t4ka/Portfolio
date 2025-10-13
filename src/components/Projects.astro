@@ -1,0 +1,130 @@
+---
+const currentLang = Astro.currentLocale || "es";
+import { useTranslations } from "../i18n/utils";
+import { languageList } from "../i18n/ui";
+
+const translateLabels = useTranslations(
+  currentLang as keyof typeof languageList
+);
+
+const projects = [
+  {
+    titleKey: "proj.threads.title", // Usamos la clave
+    date: "23 sep 2023", // La fecha generalmente no se traduce
+    image: "/threads-clone.jpg",
+    descriptionKey: "proj.threads.description", // Usamos la clave
+    tags: ["Next.js", "Tailwind", "Clerk"],
+    site: "https://threads-clone-demo.com",
+    code: "https://github.com/usuario/threads-clone",
+  },
+  {
+    titleKey: "proj.tesla.title", // Usamos la clave
+    date: "15 ago 2023",
+    image: "/tesla.jpg",
+    descriptionKey: "proj.tesla.description", // Usamos la clave
+    tags: ["Astro", "Tailwind"],
+    site: "https://tesla-demo.com",
+    code: "https://github.com/usuario/tesla-clone",
+  },
+] as const; // ¡CLAVE: Mantenemos el 'as const' para tipado correcto!
+---
+
+<section id="proyectos" class="bg-white dark:bg-[#1E1E1E] rounded-3xl shadow-xl p-6 md:p-12 max-w-6xl mx-auto scroll-mt-40 transition-colors duration-500 ease-in-out">
+  <h2 class="text-2xl font-bold text-center mb-10 text-[#1E1E1E] dark:text-white">
+    {translateLabels('projects.title')}
+  </h2>
+
+  <div class="grid gap-8 sm:grid-cols-2">
+    {projects.map((project) => (
+      <article
+        class="rounded-2xl border dark:bg-[#1E1E1E] border-gray-200 dark:border-gray-700 dark:shadow-[0_0_30px_#A855F7] p-4 flex flex-col justify-between"
+      >
+
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-3">
+          <h3 class="font-semibold text-lg text-[#1E1E1E]">
+            {translateLabels(project.titleKey)}
+          </h3>
+          <span class="text-sm text-gray-400">{project.date}</span>
+        </header>
+
+        <!-- Imagen -->
+        <img
+          src={project.image}
+          alt={translateLabels(project.titleKey)}
+          class="rounded-xl object-cover w-full h-64 mb-4"
+        />
+
+        <!-- Descripción -->
+        <p class="text-gray-600 text-sm leading-relaxed mb-3">
+          {translateLabels(project.descriptionKey)}
+        </p>
+
+        <!-- Footer de la card -->
+<div class="flex justify-between items-center mt-4 text-sm">
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-2">
+    {project.tags.map((tag) => (
+      <span
+        class="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs font-medium"
+      >
+        {tag}
+      </span>
+    ))}
+  </div>
+
+  <!-- Enlaces -->
+  <div class="flex items-center gap-3 text-gray-500">
+    {project.site && (
+      <a
+        href={project.site}
+        target="_blank"
+        class="hover:text-purple-600 transition-colors"
+        aria-label="Ver sitio"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+          <polyline points="15 3 21 3 21 9" />
+          <line x1="10" y1="14" x2="21" y2="3" />
+        </svg>
+      </a>
+    )}
+    {project.code && (
+      <a
+        href={project.code}
+        target="_blank"
+        class="hover:text-purple-600 transition-colors"
+        aria-label="Ver código"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M16 18l6-6-6-6" />
+          <path d="M8 6l-6 6 6 6" />
+        </svg>
+      </a>
+    )}
+  </div>
+</div>
+      </article>
+    ))}
+  </div>
+</section>
