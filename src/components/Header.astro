@@ -4,10 +4,9 @@ import { useTranslations } from "../i18n/utils";
 import { languageList } from "../i18n/ui";
 
 const translateLabels = useTranslations(
-  currentLang as keyof typeof languageList
+    currentLang as keyof typeof languageList,
 );
 ---
-
 
 <header
     class="flex justify-center items-center py-3 px-4 z-50 fixed top-0 left-0 w-full backdrop-blur-md shadow-sm"
@@ -20,7 +19,9 @@ const translateLabels = useTranslations(
                 src="../src/assets/me.jpg"
                 alt="Profile picture"
             />
-            <span class="font-bold text-[#1E1E1E] dark:text-white">Juan Manuel Quevedo Gonzalez</span>
+            <span class="font-bold text-[#1E1E1E] dark:text-white"
+                >Juan Manuel Quevedo Gonzalez</span
+            >
         </div>
 
         <!-- Botón hamburguesa (visible solo en móvil) -->
@@ -51,15 +52,15 @@ const translateLabels = useTranslations(
         >
             <a
                 class="transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
-                href="#sobre-mi">{translateLabels('nav.about')}</a
+                href="#sobre-mi">{translateLabels("nav.about")}</a
             >
             <a
                 class="transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
-                href="#experiencia">{translateLabels('nav.experience')}</a
+                href="#experiencia">{translateLabels("nav.experience")}</a
             >
             <a
                 class="transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
-                href="#proyectos">{translateLabels('nav.projects')}</a
+                href="#proyectos">{translateLabels("nav.projects")}</a
             >
         </nav>
 
@@ -95,21 +96,16 @@ const translateLabels = useTranslations(
             >
                 <!-- 🌙 SVG luna -->
                 <svg
-                    id="moon-icon"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
+                    width="24"
+                    height="24"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
                     class="w-6 h-6 block dark:hidden"
+                    ><path
+                        fill="currentColor"
+                        d="M12 22c5.523 0 10-4.477 10-10c0-.463-.694-.54-.933-.143a6.5 6.5 0 1 1-8.924-8.924C12.54 2.693 12.463 2 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10"
+                    ></path></svg
                 >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M21.752 15.002A9.718 9.718 0 0112.002 21a9.719 9.719 0 01-9.75-9.75 9.72 9.72 0 0110.5-9.705 7.5 7.5 0 009 9.457z"
-                    >
-                    </path>
-                </svg>
 
                 <!-- ☀️ SVG sol -->
                 <svg
@@ -209,13 +205,17 @@ const translateLabels = useTranslations(
     });
 </script>
 
-/*Script para el botón de cambio de idioma */
 <script>
     const btnTheme = document.getElementById("theme-toggle");
+
+    // Solo necesitamos la lógica del CLICK. La lógica de carga inicial fue al <head>.
     btnTheme?.addEventListener("click", (e) => {
         e.preventDefault();
+
+        // 1. Toggle la clase
         document.documentElement.classList.toggle("dark");
-        // Guardar preferencia en localStorage
+
+        // 2. Guardar preferencia en localStorage
         localStorage.setItem(
             "theme",
             document.documentElement.classList.contains("dark")
@@ -223,26 +223,6 @@ const translateLabels = useTranslations(
                 : "light",
         );
     });
-    // Al cargar la página, aplicar el tema guardado en localStorage
-    const colorLocal = localStorage.getItem("theme");
-    const colorSistema = window.matchMedia("(prefers-color-scheme: dark)")
-        .matches
-        ? "dark"
-        : "light";
-
- if (colorLocal){
-    if (colorLocal === "dark") {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
- } else {
-    if (colorSistema === "dark") {
-        document.documentElement.classList.add("dark");
-    } else {
-        document.documentElement.classList.remove("dark");
-    }
- }
 </script>
 
 /*Script para el botón de cambio de idioma */
@@ -251,14 +231,14 @@ const translateLabels = useTranslations(
 
     // 1. Define los idiomas soportados (debes mantener esta lista sincronizada con ui.ts)
     // Usamos esta lista para saber cuáles son los posibles prefijos de URL.
-    const LANGUAGES = ['es', 'en'];
-    const DEFAULT_LANG = 'es'; 
+    const LANGUAGES = ["es", "en"];
+    const DEFAULT_LANG = "es";
 
     function toggleLanguage() {
         const currentPathname = window.location.pathname;
         let currentLang = DEFAULT_LANG;
         let pathWithoutLang = currentPathname;
-        
+
         // 2. Identificar el idioma actual en la URL
         for (const lang of LANGUAGES) {
             // Buscamos el prefijo '/es/', '/en/', etc.
@@ -267,31 +247,32 @@ const translateLabels = useTranslations(
             if (langPrefix.test(currentPathname)) {
                 currentLang = lang;
                 // Extraemos el resto de la ruta
-                pathWithoutLang = currentPathname.replace(`/${lang}`, '');
+                pathWithoutLang = currentPathname.replace(`/${lang}`, "");
                 // Aseguramos que la ruta raíz sea solo '/'
-                if (pathWithoutLang === '') {
-                    pathWithoutLang = '/';
+                if (pathWithoutLang === "") {
+                    pathWithoutLang = "/";
                 }
                 break;
             }
         }
 
         // 3. Determinar el nuevo idioma (el opuesto)
-        const nextLang = LANGUAGES.find(lang => lang !== currentLang) || DEFAULT_LANG;
+        const nextLang =
+            LANGUAGES.find((lang) => lang !== currentLang) || DEFAULT_LANG;
 
         // 4. Construir la nueva URL
         let newPathname = `/${nextLang}${pathWithoutLang}`;
-        
+
         // Limpiar la URL para evitar rutas dobles (ej. /en//)
-        newPathname = newPathname.replace(/\/{2,}/g, '/');
+        newPathname = newPathname.replace(/\/{2,}/g, "/");
 
         // 5. Redirigir y forzar la recarga
         window.location.href = newPathname;
     }
 
     // 6. Adjuntar el evento al botón
-    const langToggleBtn = document.getElementById('lang-toggle');
+    const langToggleBtn = document.getElementById("lang-toggle");
     if (langToggleBtn) {
-        langToggleBtn.addEventListener('click', toggleLanguage);
+        langToggleBtn.addEventListener("click", toggleLanguage);
     }
 </script>

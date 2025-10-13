@@ -10,8 +10,8 @@ export const labels = {
         "nav.projects": "Proyectos",
         "about.description": "Apasionado por crear experiencias de usuario fluidas y estéticas. Me especializo en proyectos web emocionantes.",
         "about.tech": "Tecnologías",
-        "about.experience": "+2 años de experiencia",
-        "about.projects": "+100 sitios web",
+        "about.experience": " años de experiencia",
+        "about.projects": " sitios web",
         "experience.title": "Experiencia",
         "experience.description": "Como desarrollador web, me apasiona construir soluciones digitales que no solo funcionen, sino que también resuelvan problemas de manera eficiente. En este apartado, te presento una selección de mis trabajos más relevantes, donde he aplicado mis habilidades en el desarrollo de software, la optimización y la automatización de procesos para crear productos web robustos e innovadores.",
 
@@ -52,8 +52,8 @@ export const labels = {
         "nav.projects": "Projects",
         "about.description": "Passionate about creating fluid and aesthetic user experiences. I specialize in exciting web projects.",
         "about.tech": "Technologies",
-        "about.experience": "+2 years of experience",
-        "about.projects": "+100 websites",
+        "about.experience": " years of experience",
+        "about.projects": " websites",
         "experience.title": "Experience",
         "experience.description": "As a web developer, I am passionate about building digital solutions that not only work but also efficiently solve problems. In this section, I present a selection of my most relevant work, where I have applied my skills in software development, optimization, and process automation to create robust and innovative web products.",
 

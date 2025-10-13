@@ -4,7 +4,7 @@ import { useTranslations } from "../i18n/utils";
 import { languageList } from "../i18n/ui";
 
 const translateLabels = useTranslations(
-  currentLang as keyof typeof languageList
+    currentLang as keyof typeof languageList,
 );
 ---
 
@@ -16,12 +16,14 @@ const translateLabels = useTranslations(
     <div
         class="bento col-span-4 row-span-5 text-left items-start bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h1 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">Juan Manuel Quevedo</h1>
+        <h1 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">
+            Juan Manuel Quevedo
+        </h1>
         <h2 class="text-4xl font-semibold text-[#A855F7] te mb-2">
             Frontend Developer
         </h2>
         <p class="text-[#1E1E1E] dark:text-white mb-4">
-            {translateLabels('about.description')}
+            {translateLabels("about.description")}
         </p>
 
         <div class="flex flex-wrap gap-4 justify-between">
@@ -39,7 +41,8 @@ const translateLabels = useTranslations(
                         fill="#0A66C2"
                         d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93zM6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37z"
                     ></path></svg
-                > <span class="hidden sm:block">LinkedIn</span>
+                >
+                <span class="hidden sm:block">LinkedIn</span>
             </a>
             <a
                 target="_blank"
@@ -55,7 +58,8 @@ const translateLabels = useTranslations(
                         fill="currentColor"
                         d="M8 0c4.42 0 8 3.58 8 8a8.01 8.01 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38c0-.27.01-1.13.01-2.2c0-.75-.25-1.23-.54-1.48c1.78-.2 3.65-.88 3.65-3.95c0-.88-.31-1.59-.82-2.15c.08-.2.36-1.02-.08-2.12c0 0-.67-.22-2.2.82c-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82c-.44 1.1-.16 1.92-.08 2.12c-.51.56-.82 1.28-.82 2.15c0 3.06 1.86 3.75 3.64 3.95c-.23.2-.44.55-.51 1.07c-.46.21-1.61.55-2.33-.66c-.15-.24-.6-.83-1.23-.82c-.67.01-.27.38.01.53c.34.19.73.9.82 1.13c.16.45.68 1.31 2.69.94c0 .67.01 1.3.01 1.49c0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8"
                     ></path></svg
-                > <span class="hidden sm:block">Github</span>
+                >
+                <span class="hidden sm:block">Github</span>
             </a>
             <a
                 href="mailto:juanm_quevedo@hotmail.com"
@@ -70,7 +74,8 @@ const translateLabels = useTranslations(
                         fill="currentColor"
                         d="M2.004 7.75A3.75 3.75 0 0 1 5.754 4H22.25A3.75 3.75 0 0 1 26 7.75v.01l-12 6.147L2.004 7.764zm0 1.699v9.801A3.75 3.75 0 0 0 5.754 23H22.25A3.75 3.75 0 0 0 26 19.25V9.446l-11.658 5.972a.75.75 0 0 1-.684 0z"
                     ></path></svg
-                > <span class="hidden sm:block">Email</span>
+                >
+                <span class="hidden sm:block">Email</span>
             </a>
             <a
                 href="whatsapp://send?phone=573043776096&text=Hola%20Juan%20Manuel!%20Te%20contacto%20desde%20tu%20portafolio."
@@ -85,7 +90,8 @@ const translateLabels = useTranslations(
                         fill="#1FAF38"
                         d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01m-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.26 8.26 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23m4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07s.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28"
                     ></path></svg
-                > <span class="hidden sm:block">Whatsapp</span>
+                >
+                <span class="hidden sm:block">Whatsapp</span>
             </a>
         </div>
     </div>
@@ -104,7 +110,9 @@ const translateLabels = useTranslations(
     <div
         class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <p class="text-lg font-semibold text-[#1E1E1E] dark:text-white">Colombia</p>
+        <p class="text-lg font-semibold text-[#1E1E1E] dark:text-white">
+            Colombia
+        </p>
     </div>
 
     <!-- 4️⃣ Experiencia -->
@@ -112,7 +120,7 @@ const translateLabels = useTranslations(
         class="bento col-span-4 row-span-4 flex items-center text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
         <h2 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">
-            {translateLabels('about.experience')}
+            <span id="counter-experiencia" data-count="2">+2</span>{translateLabels("about.experience")}
         </h2>
     </div>
 
@@ -120,7 +128,9 @@ const translateLabels = useTranslations(
     <div
         class="bento col-span-4 row-span-6 bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
     >
-        <h3 class="text-gray-900 dark:text-white font-semibold mb-4 text-2xl">{translateLabels('about.tech')}</h3>
+        <h3 class="text-gray-900 dark:text-white font-semibold mb-4 text-2xl">
+            {translateLabels("about.tech")}
+        </h3>
         <div class="grid grid-cols-3 place-items-center gap-x-4 gap-y-6">
             <div class="flex flex-col items-center gap-2">
                 <svg
@@ -319,6 +329,65 @@ const translateLabels = useTranslations(
     <div
         class="bento col-span-4 row-span-5 flex items-center justify-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl shadow-xl"
     >
-        <h2 class="text-6xl font-bold text-gray-900 dark:text-white">{translateLabels('about.projects')}</h2>
+        <h2 class="text-6xl font-bold text-gray-900 dark:text-white">
+            <span id="counter-proyectos" data-count="100">+100</span>{
+                translateLabels("about.projects")
+            }
+        </h2>
     </div>
 </section>
+
+
+<script is:inline>
+    // La función que anima cualquier elemento con 'data-count'
+    function animateCounter(element) {
+        const targetCount = parseInt(element.getAttribute('data-count'), 10);
+        if (isNaN(targetCount)) return;
+
+        let currentCount = 0;
+        
+        // **********************************************
+        // DURACIÓN TOTAL PARA LLEGAR AL OBJETIVO (2 segundos)
+        // **********************************************
+        const duration = 1500; // 2000 milisegundos = 2 segundos
+        const intervalTime = 10; // Tiempo entre actualizaciones (10ms es suave)
+
+        // Calcula el número total de intervalos que habrá en la duración.
+        const totalIntervals = duration / intervalTime;
+        
+        // Calcula el incremento por paso. Usamos Math.ceil solo para asegurarnos
+        // de que contamos al menos 1 por paso, pero para 100 es mejor usar Math.round/floor.
+        // Aquí lo hacemos más preciso:
+        const step = targetCount / totalIntervals; 
+
+        const interval = setInterval(() => {
+            currentCount += step;
+
+            if (currentCount >= targetCount) {
+                currentCount = targetCount;
+                clearInterval(interval);
+                // Aseguramos que el valor final sea +100
+                element.textContent = `+${Math.floor(currentCount)}`; 
+            } else {
+                // Mostramos la parte entera del conteo
+                element.textContent = `+${Math.floor(currentCount)}`;
+            }
+        }, intervalTime);
+    }
+
+    // --- Ejecución de los Contadores ---
+    
+    // 1. Contador de Proyectos (+100)
+    const counterElement1 = document.getElementById('counter-proyectos');
+    if (counterElement1) {
+        animateCounter(counterElement1);
+    }
+
+    // 2. Contador de Experiencia (+2)
+    const counterElement2 = document.getElementById('counter-experiencia');
+    if (counterElement2) {
+        animateCounter(counterElement2);
+    }
+</script>
+
+
