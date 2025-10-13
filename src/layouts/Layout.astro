@@ -10,43 +10,48 @@ import { useTranslations } from "../i18n/utils";
 import { languageList } from "../i18n/ui";
 
 const translateLabels = useTranslations(
-  currentLang as keyof typeof languageList
+	currentLang as keyof typeof languageList,
 );
 
 // --- SEO SETUP ---
 // 1. URLs Canónicas y de Idioma Alternativo
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const alternativeLang = currentLang === 'es' ? 'en' : 'es';
-const alternativePath = Astro.url.pathname.replace(`/${currentLang}`, `/${alternativeLang}`);
+const alternativeLang = currentLang === "es" ? "en" : "es";
+const alternativePath = Astro.url.pathname.replace(
+	`/${currentLang}`,
+	`/${alternativeLang}`,
+);
 const alternativeURL = new URL(alternativePath, Astro.site);
 
 // 2. Metadatos (Usar claves de traducción si están disponibles, sino usar un valor por defecto)
-const defaultTitle = translateLabels('nav.about') ? `${translateLabels('nav.about')} - Juan Manuel Quevedo` : "Juan Manuel Quevedo Gonzalez - Frontend Developer";
-const defaultDescription = translateLabels('about.description') || "Portfolio de Juan Manuel Quevedo. Apasionado por crear experiencias de usuario fluidas y estéticas.";
-const socialImage = new URL('../src/assets/me.webp', Astro.site).href; // Asegúrate de que esta imagen exista en /public
+const defaultTitle = translateLabels("nav.about")
+	? `${translateLabels("nav.about")} - Juan Manuel Quevedo`
+	: "Juan Manuel Quevedo Gonzalez - Frontend Developer";
+const defaultDescription =
+	translateLabels("about.description") ||
+	"Portfolio de Juan Manuel Quevedo. Apasionado por crear experiencias de usuario fluidas y estéticas.";
+const socialImage = new URL("../src/assets/me.webp", Astro.site).href; // Asegúrate de que esta imagen exista en /public
 
 // 3. Datos Estructurados (JSON-LD) para SEO Avanzado
 const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Juan Manuel Quevedo Gonzalez", // Tu nombre completo
-    "url": canonicalURL.href, // URL canónica de tu portafolio
-    "jobTitle": "Frontend Developer & Web Implementer", // Tu rol principal
-    "description": defaultDescription, // Usamos la descripción que ya definiste
-    "sameAs": [
-        // Añade aquí todas tus redes sociales o perfiles profesionales
-        "https://www.linkedin.com/in/juan-manuel-quevedo-gonzalez-9793b2156/",
-        "https://github.com/H1r0t4ka", 
-    ],
-    "knowsLanguage": [
-        { "@type": "Language", "name": "Spanish" },
-        { "@type": "Language", "name": "English" } 
-    ]
+	"@context": "https://schema.org",
+	"@type": "Person",
+	name: "Juan Manuel Quevedo Gonzalez", // Tu nombre completo
+	url: canonicalURL.href, // URL canónica de tu portafolio
+	jobTitle: "Frontend Developer & Web Implementer", // Tu rol principal
+	description: defaultDescription, // Usamos la descripción que ya definiste
+	sameAs: [
+		// Añade aquí todas tus redes sociales o perfiles profesionales
+		"https://www.linkedin.com/in/juan-manuel-quevedo-gonzalez-9793b2156/",
+		"https://github.com/H1r0t4ka",
+	],
+	knowsLanguage: [
+		{ "@type": "Language", name: "Spanish" },
+		{ "@type": "Language", name: "English" },
+	],
 };
 ---
----
 
-<!doctype html>
 <html lang={currentLang} class="dark">
 	<head>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -62,42 +67,53 @@ const schemaData = {
 		// --- SEO Metatags ---
 		<title>{defaultTitle}</title>
 		<meta name="description" content={defaultDescription} />
-        <link rel="canonical" href={canonicalURL.href} />
-        <meta http-equiv="Content-Language" content={currentLang} />
+		<link rel="canonical" href={canonicalURL.href} />
+		<meta http-equiv="Content-Language" content={currentLang} />
 		<link rel="alternate" hreflang={currentLang} href={canonicalURL.href} />
-        <link rel="alternate" hreflang={alternativeLang} href={alternativeURL.href} />
-        <link rel="alternate" hreflang="x-default" href={new URL('/', Astro.site).href} />
+		<link
+			rel="alternate"
+			hreflang={alternativeLang}
+			href={alternativeURL.href}
+		/>
+		<link
+			rel="alternate"
+			hreflang="x-default"
+			href={new URL("/", Astro.site).href}
+		/>
 		// Open Graph / Facebook
 		<meta property="og:title" content={defaultTitle} />
-        <meta property="og:description" content={defaultDescription} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalURL.href} />
-        <meta property="og:image" content={socialImage} />
-        <meta property="og:locale" content={currentLang} />
+		<meta property="og:description" content={defaultDescription} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:image" content={socialImage} />
+		<meta property="og:locale" content={currentLang} />
 		// Twitter
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={defaultTitle} />
-        <meta name="twitter:description" content={defaultDescription} />
-        <meta name="twitter:image" content={socialImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={defaultTitle} />
+		<meta name="twitter:description" content={defaultDescription} />
+		<meta name="twitter:image" content={socialImage} />
 
 		<script is:inline>
-        const THEME_KEY = 'theme';
-        const colorLocal = localStorage.getItem(THEME_KEY);
-        const colorSistema = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        
-        // Determinar si se debe aplicar 'dark'
-        const shouldBeDark = 
-            (colorLocal === 'dark') || 
-            (!colorLocal && colorSistema); // Si no hay preferencia local, usa la del sistema
-        
-        if (shouldBeDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    </script>
+			const THEME_KEY = "theme";
+			const colorLocal = localStorage.getItem(THEME_KEY);
+			const colorSistema = window.matchMedia(
+				"(prefers-color-scheme: dark)",
+			).matches;
+
+			// Determinar si se debe aplicar 'dark'
+			const shouldBeDark =
+				colorLocal === "dark" || (!colorLocal && colorSistema); // Si no hay preferencia local, usa la del sistema
+
+			if (shouldBeDark) {
+				document.documentElement.classList.add("dark");
+			} else {
+				document.documentElement.classList.remove("dark");
+			}
+		</script>
 	</head>
-	<body class="mx-auto px-3 max-w-6xl bg-[#f5f5f5] dark:bg-[#121212] transition-colors duration-500 ease-in-out">
+	<body
+		class="mx-auto px-3 max-w-6xl bg-[#f5f5f5] dark:bg-[#121212] transition-colors duration-500 ease-in-out"
+	>
 		<Header />
 		<slot />
 		<Footer />
