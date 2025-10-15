@@ -31,7 +31,7 @@ export const labels = {
         "exp.freelance.task3": '<span class="font-bold">Gestión integral de proyectos web</span> desde la conceptualización hasta el lanzamiento, incluyendo la recopilación de requisitos del cliente, planificación, desarrollo iterativo y despliegue final.',
 
         /* Proyectos */
-        "projects.title": "Projects",
+        "projects.title": "Proyectos",
 
         // --- Threads Clone ---
         "proj.threads.title": "Threads clone",
