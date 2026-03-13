@@ -36,7 +36,7 @@ const translateLabels = useTranslations(
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
-                class="w-6 h-6 text-gray-800"
+                class="w-6 h-6 text-[#1E1E1E] dark:text-white"
             >
                 <path
                     stroke-linecap="round"
@@ -48,7 +48,7 @@ const translateLabels = useTranslations(
         <!-- Nav -->
         <nav
             id="nav-menu"
-            class="hidden sm:flex flex-col sm:flex-row items-center sm:items-start gap-y-4 sm:gap-y-0 sm:gap-x-8 text-center sm:text-left absolute sm:static top-full left-0 w-full sm:w-auto shadow-lg sm:shadow-none rounded-b-2xl sm:rounded-none p-6 sm:p-0 transition-all duration-300 opacity-0 scale-y-0 origin-top"
+            class="hidden sm:flex flex-col sm:flex-row items-center sm:items-start gap-y-4 sm:gap-y-0 sm:gap-x-8 text-center sm:text-left absolute sm:static top-full left-0 w-full sm:w-auto shadow-lg sm:shadow-none rounded-b-2xl sm:rounded-none p-6 sm:p-0 transition-all duration-300 opacity-0 scale-y-0 origin-top bg-white dark:bg-[#121212] sm:bg-transparent sm:dark:bg-transparent text-[#1E1E1E] dark:text-white"
         >
             <a
                 class="transition duration-300 ease-in-out hover:scale-120 text-[#1E1E1E] dark:text-white"
@@ -144,7 +144,6 @@ const translateLabels = useTranslations(
             navMenu.classList.add(
                 "flex",
                 "flex-col",
-                "bg-white",
                 "transition-all",
                 "duration-300",
                 "ease-in-out",
@@ -152,6 +151,7 @@ const translateLabels = useTranslations(
                 "scale-y-100",
                 "origin-top",
             );
+            navMenu.classList.remove("flex-row", "opacity-0", "scale-y-0");
         };
 
         const hideMenu = () => {
@@ -159,7 +159,7 @@ const translateLabels = useTranslations(
             navMenu.classList.remove("opacity-100", "scale-y-100");
             setTimeout(() => {
                 navMenu.classList.add("hidden");
-                navMenu.classList.remove("flex", "flex-col", "bg-white");
+                navMenu.classList.remove("flex", "flex-col");
             }, 300);
         };
 
@@ -187,16 +187,21 @@ const translateLabels = useTranslations(
                     "hidden",
                     "opacity-0",
                     "scale-y-0",
-                    "bg-white",
                     "transition-all",
                     "duration-300",
                     "ease-in-out",
                 );
                 navMenu.classList.add("flex", "flex-row");
+                navMenu.classList.remove("opacity-100", "scale-y-100", "origin-top");
             } else {
                 // Estado inicial oculto en móvil
-                navMenu.classList.add("hidden");
-                navMenu.classList.remove("flex-row");
+                navMenu.classList.add("hidden", "opacity-0", "scale-y-0", "origin-top");
+                navMenu.classList.remove(
+                    "flex",
+                    "flex-row",
+                    "opacity-100",
+                    "scale-y-100",
+                );
             }
         };
 

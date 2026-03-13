@@ -11,7 +11,7 @@ const projects = [
   {
     titleKey: "proj.threads.title", // Usamos la clave
     date: "23 sep 2023", // La fecha generalmente no se traduce
-    image: "/threads-clone.jpg",
+    image: "/me.jpg",
     descriptionKey: "proj.threads.description", // Usamos la clave
     tags: ["Next.js", "Tailwind", "Clerk"],
     site: "https://threads-clone-demo.com",
@@ -20,12 +20,66 @@ const projects = [
   {
     titleKey: "proj.tesla.title", // Usamos la clave
     date: "15 ago 2023",
-    image: "/tesla.jpg",
+    image: "/me.jpg",
     descriptionKey: "proj.tesla.description", // Usamos la clave
     tags: ["Astro", "Tailwind"],
     site: "https://tesla-demo.com",
     code: "https://github.com/usuario/tesla-clone",
   },
+  {
+    titleKey: "proj.threads.title",
+    date: "02 jul 2024",
+    image: "/me.jpg",
+    descriptionKey: "proj.threads.description",
+    tags: ["Next.js", "Tailwind"],
+    site: "https://threads-clone-demo.com",
+    code: "https://github.com/usuario/threads-clone",
+  },
+  {
+    titleKey: "proj.tesla.title",
+    date: "11 may 2024",
+    image: "/me.jpg",
+    descriptionKey: "proj.tesla.description",
+    tags: ["Astro", "Tailwind"],
+    site: "https://tesla-demo.com",
+    code: "https://github.com/usuario/tesla-clone",
+  },
+  {
+    titleKey: "proj.threads.title",
+    date: "29 mar 2024",
+    image: "/me.jpg",
+    descriptionKey: "proj.threads.description",
+    tags: ["Next.js", "Clerk"],
+    site: "https://threads-clone-demo.com",
+    code: "https://github.com/usuario/threads-clone",
+  },
+  {
+    titleKey: "proj.tesla.title",
+    date: "18 ene 2024",
+    image: "/me.jpg",
+    descriptionKey: "proj.tesla.description",
+    tags: ["Astro", "Tailwind"],
+    site: "https://tesla-demo.com",
+    code: "https://github.com/usuario/tesla-clone",
+  },
+  {
+    titleKey: "proj.threads.title",
+    date: "07 dic 2023",
+    image: "/me.jpg",
+    descriptionKey: "proj.threads.description",
+    tags: ["Next.js", "Tailwind"],
+    site: "https://threads-clone-demo.com",
+    code: "https://github.com/usuario/threads-clone",
+  },
+  {
+    titleKey: "proj.tesla.title",
+    date: "21 oct 2023",
+    image: "/me.jpg",
+    descriptionKey: "proj.tesla.description",
+    tags: ["Astro", "Tailwind"],
+    site: "https://tesla-demo.com",
+    code: "https://github.com/usuario/tesla-clone",
+  },
 ] as const; // ¡CLAVE: Mantenemos el 'as const' para tipado correcto!
 ---
 
@@ -34,11 +88,20 @@ const projects = [
     {translateLabels('projects.title')}
   </h2>
 
-  <div class="grid gap-8 sm:grid-cols-2">
-    {projects.map((project) => (
-      <article
-        class="rounded-2xl border dark:bg-[#1E1E1E] border-gray-200 dark:border-gray-700 dark:shadow-[0_0_30px_#A855F7] p-4 flex flex-col justify-between"
-      >
+  <div class="relative">
+    <div
+      id="projects-carousel"
+      class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x overscroll-x-contain px-2 sm:px-4 py-10"
+      style="-webkit-overflow-scrolling: touch;"
+      tabindex="0"
+      aria-label="Carrusel de proyectos"
+    >
+      {projects.map((project, index) => (
+        <article
+          data-carousel-item
+          data-index={index}
+          class="snap-start flex-none w-[85%] sm:w-[70%] md:w-[48%] lg:w-[32%] rounded-2xl border dark:bg-[#1E1E1E] border-gray-200 dark:border-gray-700 dark:shadow-[0_0_30px_#A855F7] p-4 flex flex-col justify-between"
+        >
 
         <!-- Header -->
         <header class="flex justify-between items-center mb-3">
@@ -125,7 +188,142 @@ const projects = [
     )}
   </div>
 </div>
-      </article>
-    ))}
+        </article>
+      ))}
+    </div>
+    <div
+      id="projects-indicator"
+      class="flex justify-center gap-2 mt-2"
+      aria-label="Indicador de proyectos"
+    >
+      {projects.map((_, index) => (
+        <span
+          data-project-dot
+          data-index={index}
+          class="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-gray-700 transition-colors"
+        />
+      ))}
+    </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("projects-carousel");
+    if (!carousel) return;
+
+    const el = carousel;
+    const items = Array.from(el.querySelectorAll("[data-carousel-item]"));
+    const indicatorRoot = document.getElementById("projects-indicator");
+    const dots = indicatorRoot
+      ? Array.from(indicatorRoot.querySelectorAll("[data-project-dot]"))
+      : [];
+
+    const getCurrentIndex = () => {
+      if (items.length === 0) return 0;
+      const left = el.scrollLeft;
+      let closest = 0;
+      let min = Infinity;
+      for (let i = 0; i < items.length; i++) {
+        const dist = Math.abs(items[i].offsetLeft - left);
+        if (dist < min) {
+          min = dist;
+          closest = i;
+        }
+      }
+      return closest;
+    };
+
+    const setActive = (index) => {
+      for (let i = 0; i < dots.length; i++) {
+        const isActive = i === index;
+        dots[i].classList.toggle("bg-purple-600", isActive);
+        dots[i].classList.toggle("dark:bg-purple-500", isActive);
+        dots[i].classList.toggle("bg-gray-300", !isActive);
+        dots[i].classList.toggle("dark:bg-gray-700", !isActive);
+      }
+    };
+
+    let activeRaf = 0;
+    const updateActive = () => {
+      if (activeRaf) return;
+      activeRaf = requestAnimationFrame(() => {
+        activeRaf = 0;
+        setActive(getCurrentIndex());
+      });
+    };
+
+    el.addEventListener("scroll", updateActive, { passive: true });
+    window.addEventListener("resize", updateActive, { passive: true });
+    updateActive();
+
+    if (!("matchMedia" in window) || !window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    let direction = 0;
+    let intensity = 0;
+    let raf = 0;
+    let isActive = false;
+
+    const start = () => {
+      if (isActive) return;
+      isActive = true;
+      el.style.scrollSnapType = "none";
+      el.style.scrollBehavior = "auto";
+    };
+
+    const stop = () => {
+      direction = 0;
+      intensity = 0;
+      if (!isActive) return;
+      isActive = false;
+      el.style.scrollSnapType = "";
+      el.style.scrollBehavior = "";
+    };
+
+    const tick = () => {
+      raf = 0;
+      if (direction === 0 || intensity <= 0) {
+        stop();
+        return;
+      }
+      const delta = direction * Math.round(1 + intensity * 5);
+      el.scrollLeft += delta;
+      raf = requestAnimationFrame(tick);
+    };
+
+    const setMotion = (nextDirection, nextIntensity) => {
+      direction = nextDirection;
+      intensity = nextIntensity;
+      if (direction === 0 || intensity <= 0) {
+        stop();
+        return;
+      }
+      start();
+      if (!raf && direction !== 0 && intensity > 0) raf = requestAnimationFrame(tick);
+    };
+
+    const onMove = (event) => {
+      const rect = el.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width;
+
+      if (x <= 0.22) {
+        const t = Math.min(1, (0.22 - x) / 0.22);
+        setMotion(-1, t);
+        return;
+      }
+
+      if (x >= 0.78) {
+        const t = Math.min(1, (x - 0.78) / 0.22);
+        setMotion(1, t);
+        return;
+      }
+
+      setMotion(0, 0);
+    };
+
+    el.addEventListener("mousemove", onMove, { passive: true });
+    el.addEventListener("mouseleave", stop, { passive: true });
+    el.addEventListener("blur", stop, { passive: true });
+  });
+</script>
