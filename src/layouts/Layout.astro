@@ -52,7 +52,7 @@ const schemaData = {
 };
 ---
 
-<html lang={currentLang} class="dark">
+<html lang={currentLang}>
 	<head>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -94,21 +94,28 @@ const schemaData = {
 		<meta name="twitter:image" content={socialImage} />
 
 		<script is:inline>
-			const THEME_KEY = "theme";
-			const colorLocal = localStorage.getItem(THEME_KEY);
-			const colorSistema = window.matchMedia(
-				"(prefers-color-scheme: dark)",
-			).matches;
+			const media = window.matchMedia("(prefers-color-scheme: dark)");
+			const THEME_OVERRIDE_KEY = "themeOverride";
 
-			// Determinar si se debe aplicar 'dark'
-			const shouldBeDark =
-				colorLocal === "dark" || (!colorLocal && colorSistema); // Si no hay preferencia local, usa la del sistema
+			const applyTheme = () => {
+				const override = sessionStorage.getItem(THEME_OVERRIDE_KEY);
+				if (override === "dark") {
+					document.documentElement.classList.add("dark");
+					return;
+				}
+				if (override === "light") {
+					document.documentElement.classList.remove("dark");
+					return;
+				}
+				document.documentElement.classList.toggle("dark", media.matches);
+			};
 
-			if (shouldBeDark) {
-				document.documentElement.classList.add("dark");
-			} else {
-				document.documentElement.classList.remove("dark");
-			}
+			window.__applyTheme = applyTheme;
+			applyTheme();
+			media.addEventListener?.("change", () => {
+				if (sessionStorage.getItem(THEME_OVERRIDE_KEY)) return;
+				applyTheme();
+			});
 		</script>
 	</head>
 	<body

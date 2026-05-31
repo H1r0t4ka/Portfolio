@@ -212,21 +212,18 @@ const translateLabels = useTranslations(
 
 <script type="module">
     const btnTheme = document.getElementById("theme-toggle");
-
-    // Solo necesitamos la lógica del CLICK. La lógica de carga inicial fue al <head>.
     btnTheme?.addEventListener("click", (e) => {
         e.preventDefault();
 
-        // 1. Toggle la clase
-        document.documentElement.classList.toggle("dark");
+        const key = "themeOverride";
+        const current = sessionStorage.getItem(key);
+        if (current) sessionStorage.removeItem(key);
+        else {
+            const isDark = document.documentElement.classList.contains("dark");
+            sessionStorage.setItem(key, isDark ? "light" : "dark");
+        }
 
-        // 2. Guardar preferencia en localStorage
-        localStorage.setItem(
-            "theme",
-            document.documentElement.classList.contains("dark")
-                ? "dark"
-                : "light",
-        );
+        window.__applyTheme?.();
     });
 </script>
 
