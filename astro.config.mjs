@@ -7,14 +7,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://juanmanuelquevedo.dev/', // ¡Reemplaza con tu dominio real!
   vite: {
-    plugins: [tailwindcss()]
+    plugins: tailwindcss()
   },
   i18n: {
     locales: ["es", "en"],
     defaultLocale: "es",
     routing: {
       prefixDefaultLocale: true,
-      redirectToDefaultLocale: true
+      redirectToDefaultLocale: false
     }
   }
 });

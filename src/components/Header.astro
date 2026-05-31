@@ -131,8 +131,8 @@ const translateLabels = useTranslations(
     </div>
 </header>
 
-/*Script para el menú hamburguesa */
-<script>
+<!-- Script para el menu hamburguesa -->
+<script type="module">
     document.addEventListener("DOMContentLoaded", () => {
         const menuToggle = document.getElementById("menu-toggle");
         const navMenu = document.getElementById("nav-menu");
@@ -210,7 +210,7 @@ const translateLabels = useTranslations(
     });
 </script>
 
-<script>
+<script type="module">
     const btnTheme = document.getElementById("theme-toggle");
 
     // Solo necesitamos la lógica del CLICK. La lógica de carga inicial fue al <head>.
@@ -230,8 +230,8 @@ const translateLabels = useTranslations(
     });
 </script>
 
-/*Script para el botón de cambio de idioma */
-<script>
+<!-- Script para el boton de cambio de idioma -->
+<script type="module">
     // --- LÓGICA DE ALTERNANCIA DE IDIOMA ---
 
     // 1. Define los idiomas soportados (debes mantener esta lista sincronizada con ui.ts)

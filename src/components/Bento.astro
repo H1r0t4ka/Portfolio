@@ -14,13 +14,13 @@ const translateLabels = useTranslations(
 >
     <!-- 1️⃣ Presentación principal -->
     <div
-        class="bento col-span-4 row-span-7 sm:row-span-5 text-left items-start bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
+        class="bento col-span-4 row-span-7 sm:row-span-5 text-left items-start bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-lg sm:shadow-xl"
     >
         <h1 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">
             Juan Manuel Quevedo
         </h1>
-        <h2 class="text-4xl font-semibold text-[#A855F7] te mb-2">
-            Frontend Developer
+        <h2 class="text-4xl font-semibold text-[#A855F7] text-left mb-2">
+            Software Developer
         </h2>
         <p class="text-[#1E1E1E] dark:text-white mb-4">
             {translateLabels("about.description")}
@@ -98,17 +98,16 @@ const translateLabels = useTranslations(
 
     <!-- 2️⃣ Rol -->
     <div
-        class="bento col-span-2 row-span-2 text-center bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
+        class="bento col-span-2 row-span-2 text-center bg-white dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-lg sm:shadow-xl [content-visibility:auto] [contain-intrinsic-size:320px_200px]"
     >
-        <h3 class="text-sm text-[#1E1E1E] dark:text-white">Web Developer</h3>
         <p class="text-lg font-semibold text-[#1A1A1A] dark:text-white">
-            UX/UI<br />Frontend
+            UX/UI<br />Frontend<br />Backend
         </p>
     </div>
 
     <!-- 3️⃣ País -->
     <div
-        class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
+        class="bento col-span-2 row-span-2 text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-lg sm:shadow-xl [content-visibility:auto] [contain-intrinsic-size:320px_200px]"
     >
         <p class="text-lg font-semibold text-[#1E1E1E] dark:text-white">
             Colombia
@@ -117,7 +116,7 @@ const translateLabels = useTranslations(
 
     <!-- 4️⃣ Experiencia -->
     <div
-        class="bento col-span-4 row-span-4 flex items-center text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
+        class="bento col-span-4 row-span-4 flex items-center text-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-lg sm:shadow-xl [content-visibility:auto] [contain-intrinsic-size:640px_260px]"
     >
         <h2 class="text-6xl font-bold text-[#1E1E1E] dark:text-white">
             <span id="counter-experiencia" data-count="2">+2</span>{translateLabels("about.experience")}
@@ -126,7 +125,7 @@ const translateLabels = useTranslations(
 
     <!-- 5️⃣ Tecnologías -->
     <div
-        class="bento col-span-4 row-span-6 bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-xl"
+        class="bento col-span-4 row-span-6 bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl justify-center content-center shadow-lg sm:shadow-xl [content-visibility:auto] [contain-intrinsic-size:640px_420px]"
     >
         <h3 class="text-gray-900 dark:text-white font-semibold mb-4 text-2xl">
             {translateLabels("about.tech")}
@@ -327,7 +326,7 @@ const translateLabels = useTranslations(
 
     <!-- 6️⃣ Sitios creados -->
     <div
-        class="bento col-span-4 row-span-5 flex items-center justify-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl shadow-xl"
+        class="bento col-span-4 row-span-5 flex items-center justify-center bg-[#FFFFFF] dark:bg-[#1E1E1E] p-6 rounded-3xl shadow-lg sm:shadow-xl [content-visibility:auto] [contain-intrinsic-size:640px_260px]"
     >
         <h2 class="text-6xl font-bold text-gray-900 dark:text-white">
             <span id="counter-proyectos" data-count="100">+100</span>{
@@ -338,56 +337,48 @@ const translateLabels = useTranslations(
 </section>
 
 
-<script is:inline>
-    // La función que anima cualquier elemento con 'data-count'
-    function animateCounter(element) {
-        const targetCount = parseInt(element.getAttribute('data-count'), 10);
-        if (isNaN(targetCount)) return;
+<script type="module">
+    const animateCounter = (element) => {
+        const raw = element.getAttribute("data-count");
+        const targetCount = raw ? Number.parseInt(raw, 10) : NaN;
+        if (!Number.isFinite(targetCount)) return;
 
-        let currentCount = 0;
-        
-        // **********************************************
-        // DURACIÓN TOTAL PARA LLEGAR AL OBJETIVO (2 segundos)
-        // **********************************************
-        const duration = 1500; // 2000 milisegundos = 2 segundos
-        const intervalTime = 10; // Tiempo entre actualizaciones (10ms es suave)
+        const duration = 900;
+        const start = performance.now();
 
-        // Calcula el número total de intervalos que habrá en la duración.
-        const totalIntervals = duration / intervalTime;
-        
-        // Calcula el incremento por paso. Usamos Math.ceil solo para asegurarnos
-        // de que contamos al menos 1 por paso, pero para 100 es mejor usar Math.round/floor.
-        // Aquí lo hacemos más preciso:
-        const step = targetCount / totalIntervals; 
+        const frame = (now) => {
+            const t = Math.min(1, (now - start) / duration);
+            const eased = 1 - Math.pow(1 - t, 3);
+            const value = Math.floor(targetCount * eased);
+            element.textContent = `+${value}`;
+            if (t < 1) requestAnimationFrame(frame);
+        };
 
-        const interval = setInterval(() => {
-            currentCount += step;
+        requestAnimationFrame(frame);
+    };
 
-            if (currentCount >= targetCount) {
-                currentCount = targetCount;
-                clearInterval(interval);
-                // Aseguramos que el valor final sea +100
-                element.textContent = `+${Math.floor(currentCount)}`; 
-            } else {
-                // Mostramos la parte entera del conteo
-                element.textContent = `+${Math.floor(currentCount)}`;
-            }
-        }, intervalTime);
-    }
+    const startCounters = () => {
+        const counter1 = document.getElementById("counter-proyectos");
+        if (counter1) animateCounter(counter1);
 
-    // --- Ejecución de los Contadores ---
-    
-    // 1. Contador de Proyectos (+100)
-    const counterElement1 = document.getElementById('counter-proyectos');
-    if (counterElement1) {
-        animateCounter(counterElement1);
-    }
+        const counter2 = document.getElementById("counter-experiencia");
+        if (counter2) animateCounter(counter2);
+    };
 
-    // 2. Contador de Experiencia (+2)
-    const counterElement2 = document.getElementById('counter-experiencia');
-    if (counterElement2) {
-        animateCounter(counterElement2);
-    }
+    const startAfterFirstPaint = () => {
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                if ("requestIdleCallback" in window) {
+                    window.requestIdleCallback(startCounters, { timeout: 2000 });
+                } else {
+                    window.setTimeout(startCounters, 800);
+                }
+            });
+        });
+    };
+
+    if (document.readyState === "complete") startAfterFirstPaint();
+    else window.addEventListener("load", startAfterFirstPaint, { once: true });
 </script>
 
 

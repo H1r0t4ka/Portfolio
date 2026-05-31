@@ -3,6 +3,97 @@ export const languageList = {
     en: "English"
 }
 
+export const projects = {
+    es: [
+        {
+            title: "Facilcaptura",
+            description:
+                "Extensión de navegador para acelerar tareas de SEO y automatización desde el popup: capturas por elemento, utilidades de auditoría, accesos a PageSpeed y flujo de creación/automatización de proyectos en SERanking.",
+            image: "/facil.webp",
+            tags: ["JavaScript", "Chromium", "SERanking", "SEO", "Automatización"],
+            code: "https://github.com/H1r0t4ka/Facilcaptura",
+        },
+        {
+            title: "Conexión Estudiantil",
+            description:
+                "Pagina web para una agencia de idiomas dedidaca a la asesoría y gestión de estudios en el exterior.",
+            image: "/conexion.webp",
+            tags: ["WordPress", "Figma", "Elementor", "SEO"],
+            site: "https://conexionestudiantil.com/",
+        },
+        {
+            title: "FinanciaPro",
+            description:
+                "Plataforma Web de Onboarding de Créditos para PYMES - Hackaton NoCountry 2025.",
+            image: "/financia.webp",
+            tags: ["HTML", "CSS", "JavaScript", "Astro", "Tailwind", "Java", "Spring Boot", "JWT", "GPT"],
+            code: "https://github.com/H1r0t4ka/credit-onboarding-platform",
+        },
+        {
+            title: "SafeSant",
+            description:
+                "Proyecto integral que combina un tablero geoespacial interactivo y un chatbot comunitario para monitorizar, explicar y prevenir fenómenos de seguridad en los municipios del departamento de Santander, usando datos oficiales de la Policía Nacional - Concurso Datos al Ecosistema 2025 MinTic",
+            image: "/safesant.webp",
+            tags: ["Streamlit", "Next.js", "Vercel", "HuggingFace", "Chatbot"],
+            code: "https://github.com/H1r0t4ka/safesant",
+            site: "https://santanderdigitalseguro.vercel.app/",
+        },
+        {
+            title: "FlujoFacil",
+            description:
+                "Aplicación web para registrar ingresos y gastos, ver métricas y generar reportes. Incluye un asistente con IA (Gemini) y un tutorial guiado de onboarding.",
+            image: "/flujofacil.webp",
+            tags: ["React", "TypeScript", "Vite", "Tailwind", "Supabase", "Gemini", "Node.js"],
+            code: "https://github.com/H1r0t4ka/Finanzas",
+            site: "https://finanzas-nine-jet.vercel.app/",
+        },
+    ],
+    en: [
+        {
+            title: "Facilcaptura",
+            description:
+                "Browser extension to speed up SEO and automation tasks from a popup: element-based captures, audit utilities, PageSpeed shortcuts, and project creation/automation flows in SERanking.",
+            image: "/facil.webp",
+            tags: ["JavaScript", "Chromium", "SERanking", "SEO", "Automation"],
+            code: "https://github.com/H1r0t4ka/Facilcaptura",
+        },
+        {
+            title: "Conexión Estudiantil",
+            description:
+                "Website for a language agency dedicated to advising and managing studies abroad.",
+            image: "/conexion.webp",
+            tags: ["WordPress", "Figma", "Elementor", "SEO"],
+            site: "https://conexionestudiantil.com/",
+        },
+        {
+            title: "FinanciaPro",
+            description:
+                "SME credit onboarding web platform — NoCountry Hackathon 2025.",
+            image: "/financia.webp",
+            tags: ["HTML", "CSS", "JavaScript", "Astro", "Tailwind", "Java", "Spring Boot", "JWT", "GPT"],
+            code: "https://github.com/H1r0t4ka/credit-onboarding-platform",
+        },
+        {
+            title: "SafeSant",
+            description:
+                "End-to-end project combining an interactive geospatial dashboard and a community chatbot to monitor, explain, and prevent security-related events in Santander (Colombia), using official police data — MinTIC Data Ecosystem 2025.",
+            image: "/safesant.webp",
+            tags: ["Streamlit", "Next.js", "Vercel", "HuggingFace", "Chatbot"],
+            code: "https://github.com/H1r0t4ka/safesant",
+            site: "https://santanderdigitalseguro.vercel.app/",
+        },
+        {
+            title: "FlujoFacil",
+            description:
+                "Web app to track income and expenses, view metrics, and generate reports. Includes an AI assistant (Gemini) and a guided onboarding tutorial.",
+            image: "/flujofacil.webp",
+            tags: ["React", "TypeScript", "Vite", "Tailwind", "Supabase", "Gemini", "Node.js"],
+            code: "https://github.com/H1r0t4ka/Finanzas",
+            site: "https://finanzas-nine-jet.vercel.app/",
+        },
+    ],
+} as const;
+
 export const labels = {
     es: {
         "nav.about": "Sobre mí",
@@ -22,6 +113,7 @@ export const labels = {
         "exp.orbidi.task2": '<span class="font-bold">Ejecución de SEO on-page y off-page</span> (optimización de contenido, estructura, velocidad, metaetiquetas y schema markup) para mejorar la visibilidad orgánica de los sitios web.',
         "exp.orbidi.task3": '<span class="font-bold">Participación activa en equipos SCRUM</span>, contribuyendo en la planificación y ejecución de sprints para la entrega exitosa de proyectos web.',
         "exp.orbidi.task4": '<span class="font-bold">Versatilidad para trabajar con diversos CMS y constructores web</span>, demostrando capacidad de aprendizaje y aplicación de nuevas herramientas en el desarrollo web.',
+        "exp.orbidi.task5": '<span class="font-bold">Automatización de procesos y tareas</span>, integrando inteligencia artificial para optimizar el rendimiento y la eficiencia de los entregables, resultando en la reducción de tiempos en desarrollo y mejora de la calidad en los productos.',
 
         // --- Experiencia (experience) - Tareas de Freelance ---
         "exp.freelance.title": "Freelance",
@@ -32,14 +124,6 @@ export const labels = {
 
         /* Proyectos */
         "projects.title": "Proyectos",
-
-        // --- Threads Clone ---
-        "proj.threads.title": "Threads clone",
-        "proj.threads.description": "Clon de la aplicación de Threads. Permite conectar a la comunidad y compartir ideas.",
-        
-        // --- Tesla Clone ---
-        "proj.tesla.title": "Tesla Clone",
-        "proj.tesla.description": "Animaciones con scroll y réplica de la página principal de Tesla. Demostración de habilidades de maquetación y animación.",
 
         /* Footer */
         "footer.title": "¡Gracias por visitar mi portafolio!",
@@ -64,6 +148,7 @@ export const labels = {
         "exp.orbidi.task2": '<span class="font-bold">Execution of on-page and off-page SEO</span> (content optimization, structure, speed, meta tags, and schema markup) to improve the organic visibility of websites.',
         "exp.orbidi.task3": '<span class="font-bold">Active participation in SCRUM teams</span>, contributing to the planning and execution of sprints for the successful delivery of web projects.',
         "exp.orbidi.task4": '<span class="font-bold">Versatility to work with various CMS and web builders</span>, demonstrating learning capacity and application of new tools in web development.',
+        "exp.orbidi.task5": '<span class="font-bold">Process and task automation</span>, incorporating artificial intelligence to optimize the performance and efficiency of deliverables, resulting in shorter development times and improved product quality.',
 
         // --- Experiencia (experience) - Tareas de Freelance ---
         "exp.freelance.title": "Freelance",
@@ -74,14 +159,6 @@ export const labels = {
 
         /* Proyectos */
         "projects.title": "Projects",
-
-         // --- Threads Clone ---
-        "proj.threads.title": "Threads clone",
-        "proj.threads.description": "Clone of the Threads application. Allows connecting with the community and sharing ideas.",
-        
-        // --- Tesla Clone ---
-        "proj.tesla.title": "Tesla Clone",
-        "proj.tesla.description": "Scroll animations and replica of the main Tesla page. Demonstration of layout and animation skills.",
 
         /* Footer */
         "footer.title": "Thank you for visiting my portfolio!",

@@ -1,231 +1,297 @@
 ---
-const currentLang = Astro.currentLocale || "es";
 import { useTranslations } from "../i18n/utils";
-import { languageList } from "../i18n/ui";
+import { languageList, projects } from "../i18n/ui";
 
+const currentLang = Astro.currentLocale || "es";
 const translateLabels = useTranslations(
   currentLang as keyof typeof languageList
 );
 
-const projects = [
-  {
-    titleKey: "proj.threads.title", // Usamos la clave
-    date: "23 sep 2023", // La fecha generalmente no se traduce
-    image: "/me.jpg",
-    descriptionKey: "proj.threads.description", // Usamos la clave
-    tags: ["Next.js", "Tailwind", "Clerk"],
-    site: "https://threads-clone-demo.com",
-    code: "https://github.com/usuario/threads-clone",
-  },
-  {
-    titleKey: "proj.tesla.title", // Usamos la clave
-    date: "15 ago 2023",
-    image: "/me.jpg",
-    descriptionKey: "proj.tesla.description", // Usamos la clave
-    tags: ["Astro", "Tailwind"],
-    site: "https://tesla-demo.com",
-    code: "https://github.com/usuario/tesla-clone",
-  },
-  {
-    titleKey: "proj.threads.title",
-    date: "02 jul 2024",
-    image: "/me.jpg",
-    descriptionKey: "proj.threads.description",
-    tags: ["Next.js", "Tailwind"],
-    site: "https://threads-clone-demo.com",
-    code: "https://github.com/usuario/threads-clone",
-  },
-  {
-    titleKey: "proj.tesla.title",
-    date: "11 may 2024",
-    image: "/me.jpg",
-    descriptionKey: "proj.tesla.description",
-    tags: ["Astro", "Tailwind"],
-    site: "https://tesla-demo.com",
-    code: "https://github.com/usuario/tesla-clone",
-  },
-  {
-    titleKey: "proj.threads.title",
-    date: "29 mar 2024",
-    image: "/me.jpg",
-    descriptionKey: "proj.threads.description",
-    tags: ["Next.js", "Clerk"],
-    site: "https://threads-clone-demo.com",
-    code: "https://github.com/usuario/threads-clone",
-  },
-  {
-    titleKey: "proj.tesla.title",
-    date: "18 ene 2024",
-    image: "/me.jpg",
-    descriptionKey: "proj.tesla.description",
-    tags: ["Astro", "Tailwind"],
-    site: "https://tesla-demo.com",
-    code: "https://github.com/usuario/tesla-clone",
-  },
-  {
-    titleKey: "proj.threads.title",
-    date: "07 dic 2023",
-    image: "/me.jpg",
-    descriptionKey: "proj.threads.description",
-    tags: ["Next.js", "Tailwind"],
-    site: "https://threads-clone-demo.com",
-    code: "https://github.com/usuario/threads-clone",
-  },
-  {
-    titleKey: "proj.tesla.title",
-    date: "21 oct 2023",
-    image: "/me.jpg",
-    descriptionKey: "proj.tesla.description",
-    tags: ["Astro", "Tailwind"],
-    site: "https://tesla-demo.com",
-    code: "https://github.com/usuario/tesla-clone",
-  },
-] as const; // ¡CLAVE: Mantenemos el 'as const' para tipado correcto!
+const projectsForLang =
+  projects[currentLang as keyof typeof projects] ?? projects.es;
 ---
 
-<section id="proyectos" class="bg-white dark:bg-[#1E1E1E] rounded-3xl shadow-xl p-6 md:p-12 max-w-6xl mx-auto scroll-mt-40 transition-colors duration-500 ease-in-out">
+<section
+  id="proyectos"
+  class="bg-white dark:bg-[#1E1E1E] rounded-3xl shadow-xl p-6 md:p-12 max-w-6xl mx-auto scroll-mt-40 transition-colors duration-500 ease-in-out"
+>
   <h2 class="text-2xl font-bold text-center mb-10 text-[#1E1E1E] dark:text-white">
-    {translateLabels('projects.title')}
+    {translateLabels("projects.title")}
   </h2>
 
   <div class="relative">
+    <button
+      id="projects-prev"
+      type="button"
+      class="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-[#1E1E1E] transition absolute left-0 top-[45%] -translate-x-3 -translate-y-1/2"
+      aria-label="Proyecto anterior"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </button>
+
     <div
       id="projects-carousel"
-      class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory touch-pan-x overscroll-x-contain px-2 sm:px-4 py-10"
+      class="flex gap-6 overflow-x-auto overflow-y-visible snap-x snap-mandatory scroll-smooth touch-pan-x overscroll-x-contain px-4 sm:px-6 py-10 scroll-px-4 sm:scroll-px-6 items-stretch"
       style="-webkit-overflow-scrolling: touch;"
-      tabindex="0"
       aria-label="Carrusel de proyectos"
+      tabindex="0"
     >
-      {projects.map((project, index) => (
+      {projectsForLang.map((project, index) => (
         <article
           data-carousel-item
           data-index={index}
-          class="snap-start flex-none w-[85%] sm:w-[70%] md:w-[48%] lg:w-[32%] rounded-2xl border dark:bg-[#1E1E1E] border-gray-200 dark:border-gray-700 dark:shadow-[0_0_30px_#A855F7] p-4 flex flex-col justify-between"
+          class="snap-start flex-none w-[85%] sm:w-[70%] md:w-[48%] lg:w-[32%] rounded-2xl border bg-white dark:bg-[#1E1E1E] border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-md dark:shadow-black/20 dark:hover:shadow-black/40 transition-shadow duration-300 p-4 flex flex-col"
         >
+          <header class="flex justify-between items-center mb-3">
+            <h3 class="font-semibold text-lg text-[#1E1E1E] dark:text-white">
+              {project.title}
+            </h3>
+          </header>
 
-        <!-- Header -->
-        <header class="flex justify-between items-center mb-3">
-          <h3 class="font-semibold text-lg text-[#1E1E1E]">
-            {translateLabels(project.titleKey)}
-          </h3>
-          <span class="text-sm text-[#1E1E1E] dark:text-white">{project.date}</span>
-        </header>
+          <img
+            src={project.image}
+            alt={project.title}
+            class="rounded-xl object-cover w-full h-64 mb-4"
+            loading="lazy"
+          />
 
-        <!-- Imagen -->
-        <img
-          src={project.image}
-          alt={translateLabels(project.titleKey)}
-          class="rounded-xl object-cover w-full h-64 mb-4"
-          loading="lazy"
-        />
+          <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+            {project.description}
+          </p>
 
-        <!-- Descripción -->
-        <p class="text-gray-600 text-sm leading-relaxed mb-3">
-          {translateLabels(project.descriptionKey)}
-        </p>
+          <div class="mt-auto pt-4 flex justify-between items-end gap-4 text-sm">
+            <div class="flex flex-wrap gap-2 flex-1 min-w-0">
+              {project.tags.map((tag) => (
+                <span class="px-2 py-0.5 bg-purple-100 text-purple-700 dark:bg-purple-500/15 dark:text-purple-200 rounded-full text-xs font-medium">
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-        <!-- Footer de la card -->
-<div class="flex justify-between items-center mt-4 text-sm">
-  <!-- Tags -->
-  <div class="flex flex-wrap gap-2">
-    {project.tags.map((tag) => (
-      <span
-        class="px-2 py-0.5 bg-purple-100 text-purple-600 rounded-full text-xs font-medium"
-      >
-        {tag}
-      </span>
-    ))}
-  </div>
-
-  <!-- Enlaces -->
-  <div class="flex items-center gap-3 text-gray-500">
-    {project.site && (
-      <a
-        href={project.site}
-        target="_blank"
-        class="hover:text-purple-600 transition-colors"
-        aria-label="Ver sitio"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-          <polyline points="15 3 21 3 21 9" />
-          <line x1="10" y1="14" x2="21" y2="3" />
-        </svg>
-      </a>
-    )}
-    {project.code && (
-      <a
-        href={project.code}
-        target="_blank"
-        class="hover:text-purple-600 transition-colors"
-        aria-label="Ver código"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M16 18l6-6-6-6" />
-          <path d="M8 6l-6 6 6 6" />
-        </svg>
-      </a>
-    )}
-  </div>
-</div>
+            <div class="flex items-center gap-3 text-gray-500 dark:text-gray-300 shrink-0">
+              {project.site && (
+                <a
+                  href={project.site}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="hover:text-purple-600 transition-colors"
+                  aria-label="Ver sitio"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M18 13v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                    <polyline points="15 3 21 3 21 9" />
+                    <line x1="10" y1="14" x2="21" y2="3" />
+                  </svg>
+                </a>
+              )}
+              {project.code && (
+                <a
+                  href={project.code}
+                  target="_blank"
+                  rel="noreferrer"
+                  class="hover:text-purple-600 transition-colors"
+                  aria-label="Ver código"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 18l6-6-6-6" />
+                    <path d="M8 6l-6 6 6 6" />
+                  </svg>
+                </a>
+              )}
+            </div>
+          </div>
         </article>
       ))}
     </div>
+
+    <button
+      id="projects-next"
+      type="button"
+      class="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-full border border-gray-200 dark:border-gray-700 bg-white/80 dark:bg-[#1E1E1E]/80 backdrop-blur text-gray-700 dark:text-gray-200 hover:bg-white dark:hover:bg-[#1E1E1E] transition absolute right-0 top-[45%] translate-x-3 -translate-y-1/2"
+      aria-label="Proyecto siguiente"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M9 18l6-6-6-6" />
+      </svg>
+    </button>
+
     <div
       id="projects-indicator"
       class="flex justify-center gap-2 mt-2"
       aria-label="Indicador de proyectos"
-    >
-      {projects.map((_, index) => (
-        <span
-          data-project-dot
-          data-index={index}
-          class="w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-gray-700 transition-colors"
-        />
-      ))}
-    </div>
+    ></div>
   </div>
 </section>
 
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.getElementById("projects-carousel");
-    if (!carousel) return;
+<script type="module">
+  const initProjectsCarousel = () => {
+    const el = document.getElementById("projects-carousel");
+    if (!el) return;
+    if (el.dataset.initialized === "true") return;
+    el.dataset.initialized = "true";
 
-    const el = carousel;
+    const btnPrev = document.getElementById("projects-prev");
+    const btnNext = document.getElementById("projects-next");
     const items = Array.from(el.querySelectorAll("[data-carousel-item]"));
-    const indicatorRoot = document.getElementById("projects-indicator");
-    const dots = indicatorRoot
-      ? Array.from(indicatorRoot.querySelectorAll("[data-project-dot]"))
-      : [];
+    const dotsRoot = document.getElementById("projects-indicator");
 
-    const getCurrentIndex = () => {
-      if (items.length === 0) return 0;
+    if (!dotsRoot || !items.length) return;
+
+    let pageLefts = [];
+    let dots = [];
+    let activePage = 0;
+
+    const styles = () => window.getComputedStyle(el);
+    const getScrollPaddingLeft = () => Number.parseFloat(styles().scrollPaddingLeft) || 0;
+
+    const buildPages = () => {
+      const paddingLeft = getScrollPaddingLeft();
+      const width = el.clientWidth;
+      const nextPageLefts = [];
+
+      let currentLeft = items[0].offsetLeft - paddingLeft;
+      nextPageLefts.push(Math.max(0, currentLeft));
+
+      for (let i = 1; i < items.length; i++) {
+        const itemLeft = items[i].offsetLeft - paddingLeft;
+        if (itemLeft >= currentLeft + width - 1) {
+          currentLeft = itemLeft;
+          nextPageLefts.push(Math.max(0, currentLeft));
+        }
+      }
+
+      pageLefts = nextPageLefts;
+
+      dotsRoot.innerHTML = "";
+      dots = [];
+      for (let i = 0; i < pageLefts.length; i++) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.setAttribute("data-page", String(i));
+        b.className =
+          "w-2.5 h-2.5 rounded-full bg-gray-300 dark:bg-gray-700 transition-colors";
+        b.setAttribute("aria-label", `Ir a la vista ${i + 1}`);
+        b.addEventListener("click", () => scrollToPage(i));
+        dotsRoot.appendChild(b);
+        dots.push(b);
+      }
+    };
+
+    const setActive = (index) => {
+      activePage = Math.max(0, Math.min(pageLefts.length - 1, index));
+      for (let i = 0; i < dots.length; i++) {
+        const isActive = i === activePage;
+        dots[i].classList.toggle("bg-purple-600", isActive);
+        dots[i].classList.toggle("dark:bg-purple-500", isActive);
+        dots[i].classList.toggle("bg-gray-300", !isActive);
+        dots[i].classList.toggle("dark:bg-gray-700", !isActive);
+        dots[i].setAttribute("aria-current", isActive ? "true" : "false");
+      }
+      btnPrev?.toggleAttribute("disabled", activePage <= 0);
+      btnNext?.toggleAttribute("disabled", activePage >= pageLefts.length - 1);
+      btnPrev?.classList.toggle("opacity-40", activePage <= 0);
+      btnNext?.classList.toggle("opacity-40", activePage >= pageLefts.length - 1);
+    };
+
+    const prefersReducedMotion =
+      "matchMedia" in window &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let scrollAnimRaf = 0;
+    const easeInOutCubic = (t) =>
+      t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    const animateScrollTo = (left) => {
+      const targetLeft = Math.round(left);
+      if (prefersReducedMotion) {
+        el.scrollLeft = targetLeft;
+        return;
+      }
+
+      if (scrollAnimRaf) cancelAnimationFrame(scrollAnimRaf);
+
+      const from = el.scrollLeft;
+      const to = targetLeft;
+      const duration = 420;
+      const start = performance.now();
+
+      el.style.scrollSnapType = "none";
+      el.style.scrollBehavior = "auto";
+
+      const step = (now) => {
+        const t = Math.min(1, (now - start) / duration);
+        el.scrollLeft = from + (to - from) * easeInOutCubic(t);
+        if (t < 1) {
+          scrollAnimRaf = requestAnimationFrame(step);
+          return;
+        }
+        scrollAnimRaf = 0;
+        el.scrollLeft = to;
+        requestAnimationFrame(() => {
+          el.style.scrollSnapType = "";
+          el.style.scrollBehavior = "";
+        });
+      };
+
+      scrollAnimRaf = requestAnimationFrame(step);
+    };
+
+    const scrollToPage = (pageIndex) => {
+      const idx = Math.max(0, Math.min(pageLefts.length - 1, pageIndex));
+      const left = pageLefts[idx] ?? 0;
+      animateScrollTo(left);
+      setActive(idx);
+    };
+
+    const getClosestPage = () => {
+      if (!pageLefts.length) return 0;
       const left = el.scrollLeft;
       let closest = 0;
       let min = Infinity;
-      for (let i = 0; i < items.length; i++) {
-        const dist = Math.abs(items[i].offsetLeft - left);
+      for (let i = 0; i < pageLefts.length; i++) {
+        const dist = Math.abs(pageLefts[i] - left);
         if (dist < min) {
           min = dist;
           closest = i;
@@ -234,96 +300,38 @@ const projects = [
       return closest;
     };
 
-    const setActive = (index) => {
-      for (let i = 0; i < dots.length; i++) {
-        const isActive = i === index;
-        dots[i].classList.toggle("bg-purple-600", isActive);
-        dots[i].classList.toggle("dark:bg-purple-500", isActive);
-        dots[i].classList.toggle("bg-gray-300", !isActive);
-        dots[i].classList.toggle("dark:bg-gray-700", !isActive);
-      }
-    };
+    btnPrev?.addEventListener("click", () => scrollToPage(activePage - 1));
+    btnNext?.addEventListener("click", () => scrollToPage(activePage + 1));
 
-    let activeRaf = 0;
-    const updateActive = () => {
-      if (activeRaf) return;
-      activeRaf = requestAnimationFrame(() => {
-        activeRaf = 0;
-        setActive(getCurrentIndex());
+    buildPages();
+    setActive(0);
+
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const next = getClosestPage();
+        if (next === activePage) return;
+        setActive(next);
       });
     };
 
-    el.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive, { passive: true });
-    updateActive();
-
-    if (!("matchMedia" in window) || !window.matchMedia("(pointer: fine)").matches) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let direction = 0;
-    let intensity = 0;
-    let raf = 0;
-    let isActive = false;
-
-    const start = () => {
-      if (isActive) return;
-      isActive = true;
-      el.style.scrollSnapType = "none";
-      el.style.scrollBehavior = "auto";
+    let resizeRaf = 0;
+    const onResize = () => {
+      if (resizeRaf) return;
+      resizeRaf = requestAnimationFrame(() => {
+        resizeRaf = 0;
+        buildPages();
+        setActive(getClosestPage());
+      });
     };
 
-    const stop = () => {
-      direction = 0;
-      intensity = 0;
-      if (!isActive) return;
-      isActive = false;
-      el.style.scrollSnapType = "";
-      el.style.scrollBehavior = "";
-    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    onScroll();
+  };
 
-    const tick = () => {
-      raf = 0;
-      if (direction === 0 || intensity <= 0) {
-        stop();
-        return;
-      }
-      const delta = direction * Math.round(1 + intensity * 5);
-      el.scrollLeft += delta;
-      raf = requestAnimationFrame(tick);
-    };
-
-    const setMotion = (nextDirection, nextIntensity) => {
-      direction = nextDirection;
-      intensity = nextIntensity;
-      if (direction === 0 || intensity <= 0) {
-        stop();
-        return;
-      }
-      start();
-      if (!raf && direction !== 0 && intensity > 0) raf = requestAnimationFrame(tick);
-    };
-
-    const onMove = (event) => {
-      const rect = el.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width;
-
-      if (x <= 0.22) {
-        const t = Math.min(1, (0.22 - x) / 0.22);
-        setMotion(-1, t);
-        return;
-      }
-
-      if (x >= 0.78) {
-        const t = Math.min(1, (x - 0.78) / 0.22);
-        setMotion(1, t);
-        return;
-      }
-
-      setMotion(0, 0);
-    };
-
-    el.addEventListener("mousemove", onMove, { passive: true });
-    el.addEventListener("mouseleave", stop, { passive: true });
-    el.addEventListener("blur", stop, { passive: true });
-  });
+  document.addEventListener("DOMContentLoaded", initProjectsCarousel);
+  document.addEventListener("astro:page-load", initProjectsCarousel);
 </script>
